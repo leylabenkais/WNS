@@ -31,6 +31,7 @@
         </div>-->
 
     <!-- Questions about emotions -->
+    <!-- Leyla's deletions --->
     <!--<b-form-group :key="key" v-for="(question, key) in questions_emotions" :label="question.question"
           label-size="lg" class="tab" v-if="currentTab==key+1">-->
     <b-form-group :key="key" v-for="(question, key) in questions_emotions" :label="question.question" label-size="lg"
@@ -44,13 +45,10 @@
         {{ text.dont_know }}
       </b-form-checkbox>
 
-      <!-- Leyla adds (jusqua /li)
-      <li class="list-group-item" v-if="pybossa.userProgress.done==(pybossa.userProgress.total-1)">
-        </li>-->
-
 
     </b-form-group>
 
+    <!-- Leyla's deletions --->
     <!-- Questions about relations 
         <div class="tab" v-if="currentTab==3">
           <legend class="col-form-label pt-0 col-form-label-lg">
@@ -89,16 +87,20 @@
 
     <div style="overflow:auto;margin-top:40px;">
       <div style="float:right;margin-left: 40px;">
+        <!-- Leyla's deletions --->
         <!-- <b-button id="prevBtn" v-on:click="prev()" v-if="currentTab>0">{{ text.prev }}</b-button>
           <b-button id="nextBtn" v-on:click="next()" v-if="currentTab<3">{{ text.next }}</b-button> 
           <b-btn @click="submit" variant="success" v-if="(currentTab==3)&&(pybossa.userProgress.done!=(pybossa.userProgress.total-1))">{{ text.submit }}</b-btn>
           <b-btn @click="submit" variant="success" v-if="(currentTab==3)&&(pybossa.userProgress.done==(pybossa.userProgress.total-1))">{{ text.finish }}</b-btn>--->
+
+        <!-- Leyla's additions --->
         <b-btn @click="submit" variant="success" v-if="(pybossa.userProgress.done!=(pybossa.userProgress.total-1))">{{
           text.submit }}</b-btn>
         <b-btn @click="submit" variant="success" v-if="(pybossa.userProgress.done==(pybossa.userProgress.total-1))">{{
           text.finish }}</b-btn>
       </div>
       <div style="text-align:right;">
+        <!-- Leyla's deletions --->
         <!--
             <span class="step" v-bind:class="{ active: currentTab==0, finish: currentTab>0 }"></span>
             <span class="step" v-bind:class="{ active: currentTab==1, finish: currentTab>1 }"></span>

@@ -12,7 +12,8 @@
         selected: [],
         selected_idk: [],
       },
-      /*roles: {
+      /* Leyla's deletions 
+      roles: {
         selected: [],
         selected_idk: false,
         selected_wop_toggle: false,
@@ -74,7 +75,8 @@
     }
     return 1;
   },
-  /*next: function(){
+  /* Leyla's deletions 
+  next: function(){
     this.isFormValid()?(
       this.currentTab = this.currentTab + 1,
       this.showAlert=!1): 
@@ -92,7 +94,8 @@
         selected: [],
         selected_idk: [],
       },
-      /*roles: {
+      /* Leyla's deletions 
+      roles: {
         selected: [],
         selected_idk: false,
         selected_wop_toggle: false,
@@ -181,7 +184,8 @@
         ]
       }
     ];
-   /* this.question_roles =
+   /* Leyla's deletions 
+   this.question_roles =
     {
       question: this.text.question_1,
       answers: [this.text.question_1_answer_1, 
@@ -266,7 +270,8 @@
           this.text.soc_question_mobile_answer_5,
         ],
       },
-      /*{
+      /*Leyla's deletions 
+      {   
         question: this.text.soc_question_emojiuse,
         answers: [
           this.text.soc_question_emojiuse_answer_1,
