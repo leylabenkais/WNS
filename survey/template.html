@@ -1,0 +1,225 @@
+<b-row v-if="((pybossa.userProgressInPercent) < 100 || !(pybossa.userProgressInPercent))">
+  <!-- Form zone -->
+  <b-col md="8" class="mt-4 mt-md-0 order-2 order-md-1">
+    <h4>{{ text.title_h4 }}</h4>
+
+    <!-- Questions about roles 
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="tab" v-if="currentTab==0">
+          <legend class="col-form-label pt-0 col-form-label-lg">
+            {{ question_roles.question }}
+          </legend>
+          <b-form-checkbox-group stacked v-model="answers.roles.selected" :options="question_roles.answers"
+            :disabled="answers.roles.selected_idk">
+          </b-form-checkbox-group>
+          <b-form-checkbox v-model="answers.roles.selected_wop_toggle" :disabled="answers.roles.selected_idk">
+            {{ text.question_1_answer_3 }}
+          </b-form-checkbox>
+          <b-form-input v-if="answers.roles.selected_wop_toggle" v-model="answers.roles.selected_wop_text"
+            :placeholder="text.question_1_subq" size="sm">
+          </b-form-input>
+          <b-form-checkbox v-model="answers.roles.selected_other_toggle" :disabled="answers.roles.selected_idk">
+            {{ text.other }}
+          </b-form-checkbox>
+          <b-form-input v-if="answers.roles.selected_other_toggle" v-model="answers.roles.selected_other_text"
+            :placeholder="text.other_spec" size="sm">
+          </b-form-input>
+          <b-form-checkbox v-model="answers.roles.selected_idk">
+            {{ text.dont_know }}
+          </b-form-checkbox>
+        </div>-->
+
+    <!-- Questions about emotions -->
+    <!--<b-form-group :key="key" v-for="(question, key) in questions_emotions" :label="question.question"
+          label-size="lg" class="tab" v-if="currentTab==key+1">-->
+    <b-form-group :key="key" v-for="(question, key) in questions_emotions" :label="question.question" label-size="lg"
+      class="tab">
+      <b-form-radio-group class="question" style="width: 100%" v-on:click="next()"
+        v-model="answers.emotions.selected[key]" buttons stacked button-variant="outline-primary"
+        :options="question.answers" :disabled="answers.emotions.selected_idk[key]">
+      </b-form-radio-group>
+      <br>
+      <b-form-checkbox v-model="answers.emotions.selected_idk[key]">
+        {{ text.dont_know }}
+      </b-form-checkbox>
+
+      <!-- Leyla adds (jusqua /li)
+      <li class="list-group-item" v-if="pybossa.userProgress.done==(pybossa.userProgress.total-1)">
+        </li>-->
+
+
+    </b-form-group>
+
+    <!-- Questions about relations 
+        <div class="tab" v-if="currentTab==3">
+          <legend class="col-form-label pt-0 col-form-label-lg">
+            {{ question_relations.question }}
+          </legend>
+          <b-form-checkbox-group class="question" stacked v-model="answers.relations.selected"
+            :options="question_relations.answers" :disabled="answers.relations.selected_idk">
+          </b-form-checkbox-group>
+          <b-form-checkbox v-model="answers.relations.selected_other_toggle" :disabled="answers.relations.selected_idk">
+            {{ text.other }}
+          </b-form-checkbox>
+          <b-form-input v-if="answers.relations.selected_other_toggle" v-model="answers.relations.selected_other_text"
+            :placeholder="text.other_spec" size="sm">
+          </b-form-input>
+          <b-form-checkbox v-model="answers.relations.selected_idk">
+            {{ text.dont_know }}
+          </b-form-checkbox>
+
+          <ul class="list-group">
+            <li class="list-group-item">
+              <legend class="col-form-label pt-0 col-form-label-lg">
+                {{ text.aux_feedback }}
+              </legend>
+              <b-form-input v-model="answers.feedback_optional" :placeholder="text.optional">
+              </b-form-input>
+            </li>
+            <li class="list-group-item" v-if="pybossa.userProgress.done==(pybossa.userProgress.total-1)">
+              <legend class="col-form-label pt-0 col-form-label-lg">
+                {{ text.final_feedback_h4 }}
+              </legend>
+              <b-form-input v-model="answers.answerFinal" :placeholder="text.optional" size="sm">
+              </b-form-input>
+            </li>
+          </ul>
+        </div>-->
+
+    <div style="overflow:auto;margin-top:40px;">
+      <div style="float:right;margin-left: 40px;">
+        <!-- <b-button id="prevBtn" v-on:click="prev()" v-if="currentTab>0">{{ text.prev }}</b-button>
+          <b-button id="nextBtn" v-on:click="next()" v-if="currentTab<3">{{ text.next }}</b-button> 
+          <b-btn @click="submit" variant="success" v-if="(currentTab==3)&&(pybossa.userProgress.done!=(pybossa.userProgress.total-1))">{{ text.submit }}</b-btn>
+          <b-btn @click="submit" variant="success" v-if="(currentTab==3)&&(pybossa.userProgress.done==(pybossa.userProgress.total-1))">{{ text.finish }}</b-btn>--->
+        <b-btn @click="submit" variant="success" v-if="(pybossa.userProgress.done!=(pybossa.userProgress.total-1))">{{
+          text.submit }}</b-btn>
+        <b-btn @click="submit" variant="success" v-if="(pybossa.userProgress.done==(pybossa.userProgress.total-1))">{{
+          text.finish }}</b-btn>
+      </div>
+      <div style="text-align:right;">
+        <!--
+            <span class="step" v-bind:class="{ active: currentTab==0, finish: currentTab>0 }"></span>
+            <span class="step" v-bind:class="{ active: currentTab==1, finish: currentTab>1 }"></span>
+            <span class="step" v-bind:class="{ active: currentTab==2, finish: currentTab>2 }"></span>
+            <span class="step" v-bind:class="{ active: currentTab==3, finish: currentTab>3 }"></span>
+            -->
+      </div>
+    </div>
+
+    <!-- Form validation errors -->
+    <b-alert variant="danger" v-model="showAlert" class="mt-2" dismissible>
+      {{ text.danger }}
+    </b-alert>
+
+    </li>
+    </ul>
+
+    <!-- User progress -->
+    <!-- <p class="mt-2">You are working now on task: <b-badge variant="warning">{{ task.id }}</b-badge></p>-->
+    <p class="mt-2"> {{ text.progress_1 }}: <b-badge variant="primary">{{ pybossa.userProgress.done }}</b-badge> {{
+      text.progress_2 }} <b-badge variant="primary">{{ pybossa.userProgress.total }}</b-badge> {{ text.progress_3 }}
+    </p>
+
+    <b-progress :value="pybossa.userProgressInPercent" :max="100"></b-progress>
+
+  </b-col>
+
+  <!-- Image -->
+  <b-col md="4" class="order-1 order-md-2">
+    <div v-if="taskInfo.url || taskInfo.link_raw" class="text-center">
+      <div v-if="pybossa.taskLoaded"
+        @click="pybossa.showModal('image', taskInfo.url ? taskInfo.url : taskInfo.link_raw)" class="clickable-element">
+        <b-img v-if="taskInfo.url" fluid-grow :src="taskInfo.url" class="shadow"
+          style="min-height: 120px; background-color: grey" alt="Image loading..."></b-img>
+        <b-img v-else fluid-grow :src="taskInfo.link_raw" class="shadow"
+          style="min-height: 120px; background-color: grey" alt="Image loading..."></b-img>
+      </div>
+      <b-spinner v-else style="width: 4rem; height: 4rem;" variant="primary"
+        :label="$t('template-editor-text-4')"></b-spinner>
+    </div>
+    <b-alert v-else :show="true" variant="danger">{{$t('template-editor-text-11')}}</b-alert>
+  </b-col>
+  <b-modal id="bv-modal-presurvey" scrollable size="xl">
+    <template #modal-header>
+      <h3> {{ text.soc_greeting }} </h3>
+    </template>
+    <div class="d-block" v-if="sociolinguistic.page==0">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h4>{{ text.soc_video_title }}</h4>
+          <b-embed type="iframe" aspect="16by9" v-bind:src="'https://www.youtube.com/embed/' + text.tutorial_video_id"
+            allowfullscreen></b-embed>
+        </li>
+        <li class="list-group-item">
+          <h4>{{ text.soc_consent_title }}</h4>
+          {{ text.soc_consent_list_header }}
+          <ul style="list-style-type: disc; margin-left: 30px;">
+            <li>{{ text.soc_consent_list_1 }}</li>
+            <li>{{ text.soc_consent_list_2 }}</li>
+            <li>{{ text.soc_consent_list_3 }}</li>
+            <li>{{ text.soc_consent_list_4 }}</li>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <h4>{{ text.soc_withdraw_title }}</h4>
+          <p>{{ text.soc_withdraw_p1 }} <strong>{{ answers.uuid }}</strong></p>
+          <p>{{ text.soc_withdraw_p2 }}</p>
+          <p>{{ text.soc_withdraw_p3_1 }} <strong><a href="https://forms.gle/GP8c37BikMBVxVRP9">{{
+                text.soc_withdraw_p3_2 }}</a></strong>. {{ text.soc_withdraw_p3_3 }} </p>
+        </li>
+        <li class="list-group-item">
+          <h4>{{ text.soc_optional_title }}</h4>
+          {{ text.soc_optional_p1 }}
+        </li>
+      </ul>
+    </div>
+    <div class="d-block" v-if="sociolinguistic.page==1">
+      <b-form-group :key="key" v-for="(question, key) in sociolinguistic_questions" :label="question.question"
+        label-size="lg">
+        <b-form-select v-model="sociolinguistic.answers[key]" :options="question.answers">
+        </b-form-select>
+      </b-form-group>
+      <b-form-group :key="key" v-for="(question, key) in sociolinguistic_checkbox" :label="question.question"
+        label-size="lg">
+        <b-form-checkbox-group v-model="sociolinguistic.answers_checkbox[key]" :options="question.answers">
+        </b-form-checkbox-group>
+      </b-form-group>
+    </div>
+    <div class="d-block" v-if="sociolinguistic.page==2">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h4>{{ text.soc_prize_description_title }}</h4>
+          <p>{{ text.soc_prize_paragraph }}</p>
+        </li>
+        <li class="list-group-item">
+          <legend class="col-form-label pt-0 col-form-label-lg">
+            {{ text.soc_prize_field_legend }}
+          </legend>
+          <b-form-input v-model="sociolinguistic.answer_email" :placeholder="text.soc_prize_email_placeholder">
+          </b-form-input>
+        </li>
+      </ul>
+    </div>
+    <template #modal-footer={ok}>
+      <div v-if="sociolinguistic.page<2">
+        <b-button variant="success" @click="modalPageNext()">
+          {{ text.soc_continue_direct }}
+        </b-button>
+      </div>
+      <div v-if="sociolinguistic.page==2">
+        <b-button variant="success" @click="ok()">
+          {{ text.soc_continue_direct }}
+        </b-button>
+      </div>
+    </template>
+  </b-modal>
+</b-row>
+
+<!-- Task end message -->
+<b-row v-else>
+  <b-col>
+    <b-jumbotron :header="text.final_success_header" :lead="text.final_success_lead"></b-jumbotron>
+  </b-col>
+</b-row>
